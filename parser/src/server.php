@@ -72,6 +72,7 @@ class Server
         $http_info = explode("\r\n\r\n", $data, 2);
         $header = $http_info[0];
         $body = count($http_info) > 1 ? $http_info[1] : 0;
+        var_dump($body);
 
         if (empty($body)) {
             call_user_func($this->handler, $connection, $header, null);
