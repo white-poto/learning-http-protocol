@@ -39,7 +39,7 @@ class Server
             echo "connected" . PHP_EOL;
             while(true){
                 $bytes = socket_read($connection, 2);
-                echo "read" . PHP_EOL;
+                echo "read" . $bytes . PHP_EOL;
                 if(empty($bytes)) continue;
                 $this->parse($connection, $bytes);
                 echo "parse" . PHP_EOL;
