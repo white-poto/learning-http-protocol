@@ -39,7 +39,7 @@ class Server
             echo "connected" . PHP_EOL;
             while(true){
                 $bytes = socket_read($connection, 2);
-                echo "read" . $bytes . PHP_EOL;
+                echo "read: " . $bytes . PHP_EOL;
                 if(empty($bytes)) {
                     sleep(1);
                     continue;
@@ -60,7 +60,7 @@ class Server
     {
         $data = $this->cache . $data;
         $header = $body = "";
-        if (strstr("\r\n\r\n", $data) === false) {
+        if (strstr("\r\n\r\n", $data) == false) {
             return $data;
         }
 
