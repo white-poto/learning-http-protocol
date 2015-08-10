@@ -43,6 +43,7 @@ class Server
                 if(empty($bytes)) continue;
                 $this->parse($connection, $bytes);
                 echo "parse" . PHP_EOL;
+                sleep(1);
             }
         }
     }
@@ -66,15 +67,18 @@ class Server
 
         if (empty($body)) {
             call_user_func($this->handler, $connection, $header, null);
+            return;
         }
 
         $content_length = $this->getContentLength($header);
         if ($content_length == 0) {
             call_user_func($this->handler, $connection, $header, null);
+            return;
         } else {
             $body = substr($body, 0, $content_length);
             $this->cache = substr($body, $content_length);
             call_user_func($this->handler, $connection, $header, $body);
+            return;
         }
     }
 
