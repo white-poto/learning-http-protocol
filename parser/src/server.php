@@ -9,11 +9,18 @@
 
 
 $server = new Server();
-$server->registerHandler(function($header, $body){
+$server->registerHandler(function($connection, $header, $body){
     echo "get request: " . time() . PHP_EOL;
     echo "header: " . PHP_EOL . $header;
     echo "body: " . PHP_EOL . $body;
+    $response = "HTTP/1.1 200 OK\r\n";
+    $response .= "Date: Mon, 10 Aug 2015 06:22:08 GMT\r\n";
+    $response .= "Content-Type: text/html;charset=utf-8\r\n\r\n";
+
+    socket_write($connection, $response, strlen($response));
 });
+
+$server->start();
 
 class Server
 {
@@ -30,7 +37,7 @@ class Server
 
         while ($connection = socket_accept($socket)) {
             $bytes = socket_read($connection, 1024);
-            $this->parse($bytes);
+            $this->parse($connection, $bytes);
         }
     }
 
@@ -39,7 +46,7 @@ class Server
         $this->handler = $handler;
     }
 
-    protected function parse($data)
+    protected function parse($connection, $data)
     {
         $data = $this->cache . $data;
         $header = $body = "";
@@ -52,16 +59,16 @@ class Server
         $body = $http_info[1];
 
         if (empty($body)) {
-            call_user_func($this->handler, $header, null);
+            call_user_func($this->handler, $connection, $header, null);
         }
 
         $content_length = $this->getContentLength($header);
         if ($content_length == 0) {
-            call_user_func($this->handler, $header, null);
+            call_user_func($this->handler, $connection, $header, null);
         } else {
             $body = substr($body, 0, $content_length);
             $this->cache = substr($body, $content_length);
-            call_user_func($this->handler, $header, $body);
+            call_user_func($this->handler, $connection, $header, $body);
         }
     }
 
