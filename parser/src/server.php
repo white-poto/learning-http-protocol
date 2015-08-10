@@ -62,7 +62,7 @@ class Server
         var_dump($data);
         $header = $body = "";
         if (strstr("\r\n\r\n", $data) == false) {
-            return $data;
+            $this->cache = $data;
         }
 
         $http_info = explode("\r\n\r\n", $data, 2);
