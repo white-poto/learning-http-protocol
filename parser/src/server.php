@@ -25,7 +25,7 @@ $server->start();
 class Server
 {
 
-    protected $cache;
+    protected $cache = "";
 
     protected $handler;
 
@@ -59,6 +59,7 @@ class Server
     protected function parse($connection, $data)
     {
         $data = $this->cache . $data;
+        var_dump($data);
         $header = $body = "";
         if (strstr("\r\n\r\n", $data) == false) {
             return $data;
