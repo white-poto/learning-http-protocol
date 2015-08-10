@@ -8,7 +8,7 @@
 
 $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
 if(socket_connect($socket, "www.google.com", 80) === false){
-    echo socket_last_error($socket) . PHP_EOL;
+    echo "ERROR:" . socket_last_error($socket) . PHP_EOL;
     exit;
 }
 
@@ -26,13 +26,13 @@ GLOB_MARK;
 
 
 if(socket_write($socket, $request, strlen($request)) === false){
-    echo socket_last_error($socket) . PHP_EOL;
+    echo "ERROR:" . socket_last_error($socket) . PHP_EOL;
     exit;
 }
 
 $response = socket_read($socket, 1024);
 if($response === false){
-    echo socket_last_error($socket);
+    echo "ERROR:" . socket_last_error($socket);
     exit;
 }
 var_dump($response);
