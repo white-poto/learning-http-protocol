@@ -61,7 +61,7 @@ class Server
         $data = $this->cache . $data;
         var_dump($data);
         $header = $body = "";
-        if (strstr("\r\n\r\n", $data) == false) {
+        if (strstr("\r\n\r\n", $data) === false) {
             $this->cache = $data;
             return;
         }
