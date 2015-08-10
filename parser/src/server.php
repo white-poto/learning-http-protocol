@@ -63,6 +63,7 @@ class Server
         $header = $body = "";
         if (strstr("\r\n\r\n", $data) == false) {
             $this->cache = $data;
+            return;
         }
 
         $http_info = explode("\r\n\r\n", $data, 2);
