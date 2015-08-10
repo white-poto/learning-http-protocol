@@ -40,7 +40,10 @@ class Server
             while(true){
                 $bytes = socket_read($connection, 2);
                 echo "read" . $bytes . PHP_EOL;
-                if(empty($bytes)) continue;
+                if(empty($bytes)) {
+                    sleep(1);
+                    continue;
+                }
                 $this->parse($connection, $bytes);
                 echo "parse" . PHP_EOL;
                 sleep(1);
