@@ -44,7 +44,9 @@ class Server
                     sleep(1);
                     continue;
                 }
-                $this->parse($connection, $bytes);
+                if($this->parse($connection, $bytes)){
+                    break;
+                }
                 echo "parse" . PHP_EOL;
                 usleep(100);
             }
@@ -64,7 +66,7 @@ class Server
         if (strstr($data, "\r\n\r\n") === false) {
             $this->cache = $data;
             echo "cached" . PHP_EOL;
-            return;
+            return false;
         }
 
         $http_info = explode("\r\n\r\n", $data, 2);
@@ -73,18 +75,20 @@ class Server
 
         if (empty($body)) {
             call_user_func($this->handler, $connection, $header, null);
-            return;
+            socket_close($connection);
+            return true;
         }
 
         $content_length = $this->getContentLength($header);
         if ($content_length == 0) {
             call_user_func($this->handler, $connection, $header, null);
-            return;
+            socket_close($connection);
+            return true;
         } else {
             $body = substr($body, 0, $content_length);
             $this->cache = substr($body, $content_length);
             call_user_func($this->handler, $connection, $header, $body);
-            return;
+            return false;
         }
     }
 
