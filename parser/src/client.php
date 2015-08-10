@@ -19,7 +19,7 @@ $request_headers = array(
 );
 
 $request = implode("\r\n", $request_headers);
-$request .= "\r\n\r\n";
+//$request .= "\r\n\r\n";
 
 if(socket_write($socket, $request, strlen($request)) === false){
     echo "ERROR:" . socket_last_error($socket) . PHP_EOL;
