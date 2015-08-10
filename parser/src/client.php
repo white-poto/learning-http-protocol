@@ -7,14 +7,14 @@
  */
 
 $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-if(socket_connect($socket, "www.google.com", 80) === false){
+if(socket_connect($socket, "www.sina.com", 80) === false){
     echo "ERROR:" . socket_last_error($socket) . PHP_EOL;
     exit;
 }
 
 $request = <<<GLOB_MARK
 GET / HTTP/1.1
-Host: www.google.com
+Host: www.sina.com
 Connection: keep-alive
 Cache-Control: max-age=0
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
