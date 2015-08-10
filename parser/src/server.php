@@ -11,8 +11,8 @@
 $server = new Server();
 $server->registerHandler(function($connection, $header, $body){
     echo "get request: " . time() . PHP_EOL;
-    echo "header: " . PHP_EOL . $header;
-    echo "body: " . PHP_EOL . $body;
+    echo "header: " . PHP_EOL . $header . PHP_EOL;
+    echo "body: " . PHP_EOL . $body . PHP_EOL;
     $response = "HTTP/1.1 200 OK\r\n";
     $response .= "Date: Mon, 10 Aug 2015 06:22:08 GMT\r\n";
     $response .= "Content-Type: text/html;charset=utf-8\r\n\r\n";
