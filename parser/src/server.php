@@ -36,9 +36,10 @@ class Server
         socket_listen($socket);
 
         while ($connection = socket_accept($socket)) {
-            $bytes = socket_read($connection, 1024);
-            echo $bytes . PHP_EOL;
-            $this->parse($connection, $bytes);
+            while(true){
+                $bytes = socket_read($connection, 1);
+                $this->parse($connection, $bytes);
+            }
         }
     }
 
