@@ -8,7 +8,7 @@
 
 $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
 if(socket_connect($socket, "www.sina.com", 80) === false){
-    echo "ERROR:" . socket_last_error($socket) . PHP_EOL;
+    echo "ERROR:" . socket_strerror(socket_last_error($socket)) . PHP_EOL;
     exit;
 }
 
@@ -22,18 +22,20 @@ $request = implode("\r\n", $request_headers);
 //$request .= "\r\n\r\n";
 
 if(socket_write($socket, $request, strlen($request)) === false){
-    echo "ERROR:" . socket_last_error($socket) . PHP_EOL;
+    echo "ERROR:" . socket_strerror(socket_last_error($socket)) . PHP_EOL;
     exit;
 }
 
-echo "we will get a error response because the request string is error." . PHP_EOL;
+echo "the server will not response until time is out" . PHP_EOL;
 $response = socket_read($socket, 1024);
 if($response === false){
-    echo "ERROR:" . socket_last_error($socket);
+    echo "ERROR:" . socket_strerror(socket_last_error($socket)) . PHP_EOL;
     exit;
 }
 echo "response:" . PHP_EOL;
 var_dump($response);
+
+echo "ERROR:" . socket_strerror(socket_last_error($socket)) . PHP_EOL;
 
 
 
