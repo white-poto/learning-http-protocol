@@ -3,18 +3,18 @@
  * Created by PhpStorm.
  * User: Jenner
  * Date: 2015/8/10
- * Time: 14:19
+ * Time: 11:58
  */
 
 $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-if(socket_connect($socket, "127.0.0.1", 1212) === false){
+if(socket_connect($socket, "www.sina.com", 80) === false){
     echo "ERROR:" . socket_strerror(socket_last_error($socket)) . PHP_EOL;
     exit;
 }
 
 $request_headers = array(
     "GET / HTTP/1.1",
-    "Host: xxx.xxx",
+    "Host: www.sina.com",
     "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
 );
 
@@ -37,3 +37,5 @@ echo "response:" . PHP_EOL;
 var_dump($response);
 
 socket_close($socket);
+
+
