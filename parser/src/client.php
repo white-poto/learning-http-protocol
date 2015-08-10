@@ -21,6 +21,7 @@ $request_headers = array(
 $request = implode("\r\n", $request_headers);
 // if comment the follow line, you will read nothing. because the request format is error.
 $request .= "\r\n\r\n";
+var_dump($request);
 
 if(socket_write($socket, $request, strlen($request)) === false){
     echo "ERROR:" . socket_strerror(socket_last_error($socket)) . PHP_EOL;
