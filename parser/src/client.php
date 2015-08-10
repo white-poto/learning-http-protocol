@@ -7,14 +7,14 @@
  */
 
 $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-if(socket_connect($socket, "www.baidu.com", 80) === false){
+if(socket_connect($socket, "www.google.com", 80) === false){
     echo socket_last_error($socket) . PHP_EOL;
     exit;
 }
 
 $request = <<<GLOB_MARK
 GET / HTTP/1.1
-Host: www.baidu.com
+Host: www.google.com
 Connection: keep-alive
 Cache-Control: max-age=0
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
@@ -35,4 +35,4 @@ if($response === false){
     echo socket_last_error($socket);
     exit;
 }
-echo $response . PHP_EOL;
+var_dump($response);
