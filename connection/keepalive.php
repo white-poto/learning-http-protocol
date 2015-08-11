@@ -4,6 +4,8 @@
  * User: Jenner
  * Date: 2015/8/11
  * Time: 9:26
+ *
+ * 以下程序在不重新初始化curl的情况下，会保持链接鲜活
  */
 
 $keep_alive = new KeepAlive();
