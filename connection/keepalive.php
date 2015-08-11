@@ -20,5 +20,8 @@ class KeepAlive {
         curl_setopt($curl, CURLOPT_HEADER, true);
         $result = curl_exec($curl);
         echo $result;
+
+        $result = curl_exec($curl);
+        echo $result;
     }
 }
