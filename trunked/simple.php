@@ -28,4 +28,3 @@ for (;;) {
     dump_chunk(implode("\n", $output));
     usleep(pow(2,18));
 }
-?>
