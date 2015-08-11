@@ -4,6 +4,8 @@
  * User: Jenner
  * Date: 2015/8/10
  * Time: 11:58
+ *
+ * 新浪http客户端，验证缺少\r\n情况下，等待超时
  */
 
 $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);

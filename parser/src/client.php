@@ -4,6 +4,8 @@
  * User: Jenner
  * Date: 2015/8/10
  * Time: 14:19
+ *
+ * 简单http socket客户端，实现一次HTTP请求
  */
 
 $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);

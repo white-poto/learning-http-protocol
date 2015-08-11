@@ -5,6 +5,8 @@
  * User: Jenner
  * Date: 2015/8/10
  * Time: 14:00
+ *
+ * 简单http server端协议解析，实现粘包、缺包，拆包
  */
 
 
